@@ -73,3 +73,9 @@ export const TEMPLATE = `[FAVORITE 원두 시향 예약 안내]
 export const EMPTY_MARK = '—'
 
 export const NOTICE = '저장·전송되지 않습니다'
+
+// 개인정보 수집·이용 동의 — 동의해야 전송 버튼이 활성화된다
+export const CONSENT = {
+  text: '입력하신 이름, 연락처, 나이, MBTI는 원두 시향 예약 안내 목적으로만 사용되며, 시향 이후 개인정보는 즉시 파기됩니다. 본 개인정보 수집·이용에 동의하지 않으실 수 있으나, 미동의 시 예약 문자 전송이 제한됩니다.',
+  label: '개인정보 수집 및 이용에 동의합니다.',
+}

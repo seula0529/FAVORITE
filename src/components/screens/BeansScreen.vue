@@ -187,7 +187,6 @@ watch(
   align-items: center;
   text-align: center;
   padding: 16px 14px;
-  box-shadow: 0 10px 24px rgba(33, 24, 21, 0.16);
 }
 
 // 그라데이션은 유형마다 밝기가 크게 다르다.

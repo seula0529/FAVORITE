@@ -50,9 +50,7 @@ const src = computed(() => {
 }
 
 .img_char {
-  width: auto;
-  height: 100%;
-  max-width: 100%;
+  width: 80%;
   object-fit: contain;
 }
 

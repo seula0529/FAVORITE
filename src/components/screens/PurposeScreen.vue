@@ -14,8 +14,7 @@
         <SwiperSlide v-for="slide in slides" :key="slide.id">
           <article class="card_purpose">
             <!-- 1:1 비율 카드 영역 -->
-            <div class="visual_purpose" :style="{ backgroundColor: slide.accent }">
-              <span class="label_purpose_step txt_label">{{ slide.step }}</span>
+            <div class="visual_purpose">
               <div class="visual_purpose_inner">
                 <BeanCharacter :image="slide.image" :alt="slide.step" light />
               </div>
@@ -107,26 +106,20 @@ watch(
   justify-content: center;
 }
 
-.label_purpose_step {
-  position: absolute;
-  top: 12px;
-  left: 14px;
-  font-size: 11px;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  color: rgba(250, 247, 242, 0.72);
-}
-
 .visual_purpose_inner {
-  width: 62%;
-  height: 62%;
+  width: 100%;
+  height: 100%;
+
+  :deep(.img_char) {
+    width: 100%;
+  }
 }
 
 .area_purpose_body {
   flex-shrink: 0;
   width: 100%;
-  text-align: center;
-  padding: 14px 4px 0;
+  text-align: left;
+  padding: 14px 0 0;
 }
 
 .tit_purpose {

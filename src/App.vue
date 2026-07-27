@@ -51,19 +51,15 @@
         :screen-class="screenClass('reservation')"
         :can-back="canGoBack"
         @back="back"
-        @toast="showToast"
       />
     </div>
-
-    <AppToast :show="toast.show" :message="toast.message" />
   </div>
 </template>
 
 <script setup>
-import { computed, reactive, ref, watch } from 'vue'
+import { computed, ref, watch } from 'vue'
 
 import InstagramLink from '@/components/common/InstagramLink.vue'
-import AppToast from '@/components/common/AppToast.vue'
 import CoverScreen from '@/components/screens/CoverScreen.vue'
 import FormScreen from '@/components/screens/FormScreen.vue'
 import ResultScreen from '@/components/screens/ResultScreen.vue'
@@ -104,16 +100,6 @@ function nextQuestion() {
 // ── 결과 ──
 // 판정 로직은 아직 비어 있다 (getResultType 내부 TODO)
 const resultBean = computed(() => getResultType(payload.value))
-
-// ── 토스트 ──
-const toast = reactive({ show: false, message: '' })
-let toastTimer = null
-function showToast(message) {
-  clearTimeout(toastTimer)
-  toast.message = message
-  toast.show = true
-  toastTimer = setTimeout(() => (toast.show = false), 2000)
-}
 
 // ── 모바일 키보드 대응 (visualViewport → --app-height) ──
 useVisualViewport()

@@ -55,7 +55,7 @@ defineEmits(['start', 'reserve'])
 
 .label_cover_eyebrow {
   font-family: $font-title;
-  font-size: 12px;
+  font-size: 14px;
   font-weight: 500;
   letter-spacing: 0.16em;
   text-transform: uppercase;
@@ -64,8 +64,8 @@ defineEmits(['start', 'reserve'])
 }
 
 .tit_cover {
-  font-size: clamp(38px, 15vw, 60px);
-  line-height: 0.94;
+  font-size: 46px;
+  line-height: 0.9;
   color: $espresso;
 
   span {
@@ -86,7 +86,7 @@ defineEmits(['start', 'reserve'])
 .visual_cover {
   flex: 1;
   min-height: 0;
-  width: 100%;
+  width: 90%;
   padding: 10px 0;
   opacity: 0.85;
 }
@@ -102,14 +102,14 @@ defineEmits(['start', 'reserve'])
   color: $espresso-soft;
 
   @include small-device {
-    font-size: 13px;
+    font-size: 14px;
   }
 }
 
 .txt_cover_caption {
   margin-top: 8px;
   font-family: $font-title;
-  font-size: 11px;
+  font-size: 14px;
   letter-spacing: 0.08em;
   color: $caramel;
 }

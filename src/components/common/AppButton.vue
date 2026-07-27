@@ -25,14 +25,14 @@ defineEmits(['click'])
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  gap: 6px;
+  gap: 10px;
   // 터치 영역 최소 44px 확보
   min-height: $tap-min;
   min-width: $tap-min;
   padding: 0 20px;
   border-radius: $r-pill;
   font-family: $font-title;
-  font-size: 15px;
+  font-size: 16px;
   font-weight: 500;
   letter-spacing: -0.01em;
   white-space: nowrap;

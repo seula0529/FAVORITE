@@ -26,7 +26,7 @@ defineProps({
   border-radius: $r-pill;
   background: rgba(33, 24, 21, 0.92);
   color: $milk-foam;
-  font-size: 13px;
+  font-size: 14px;
   font-weight: 500;
   letter-spacing: -0.01em;
   white-space: nowrap;

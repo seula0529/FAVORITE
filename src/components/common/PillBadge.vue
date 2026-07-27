@@ -20,19 +20,19 @@ defineProps({
   align-items: center;
   justify-content: center;
   max-width: 100%;
-  padding: 4px 9px;
+  padding: 5px 10px;
   border-radius: $r-pill;
   font-family: $font-body;
-  font-size: 10.5px;
+  font-size: 14px;
   font-weight: 500;
-  line-height: 1.35;
-  letter-spacing: -0.02em;
+  line-height: 18px;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
 
   @include small-device {
-    font-size: 10px;
+    font-size: 13px;
+    line-height:16px;
     padding: 4px 8px;
   }
 }

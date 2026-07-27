@@ -58,7 +58,7 @@ defineEmits(['back'])
     background 0.2s ease;
 }
 .btn_back:disabled {
-  opacity: 0.22;
+  opacity: 0.25;
 }
 .btn_back:active:not(:disabled) {
   background: $caramel-soft;
@@ -75,9 +75,8 @@ defineEmits(['back'])
 
 .label_head {
   font-family: $font-title;
-  font-size: 12px;
+  font-size: 14px;
   font-weight: 500;
-  letter-spacing: 0.08em;
   text-transform: uppercase;
   color: $caramel;
   overflow: hidden;
@@ -88,14 +87,14 @@ defineEmits(['back'])
 .progress_head {
   flex-shrink: 0;
   font-family: $font-title;
-  font-size: 13px;
+  font-size: 14px;
   color: $espresso-soft;
   letter-spacing: 0.04em;
 
   b {
     font-weight: 700;
     color: $espresso;
-    font-size: 15px;
+    font-size: 16px;
   }
 }
 </style>

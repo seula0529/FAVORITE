@@ -25,33 +25,36 @@
         </label>
       </div>
 
-      <!-- 실시간 치환 프리뷰 -->
-      <div class="group_rsv_preview_head">
-        <span class="label_rsv_preview txt_label">문자 미리보기</span>
-        <span class="desc_rsv_notice">{{ NOTICE }}</span>
-      </div>
-      <div class="box_rsv_preview" aria-live="polite">
-        <pre class="txt_rsv_preview">{{ preview }}</pre>
+      <!-- 개인정보 수집·이용 동의 -->
+      <div class="wrap_rsv_consent">
+        <p class="txt_rsv_consent_desc">{{ CONSENT.text }}</p>
+        <label class="lbl_rsv_consent">
+          <input
+            v-model="agreed"
+            type="checkbox"
+            class="chk_rsv_consent"
+          />
+          <span>{{ CONSENT.label }}</span>
+        </label>
       </div>
     </div>
 
     <footer class="footer_screen">
-      <AppButton variant="primary" block @click="handleCopy">
-        문자 내용 복사하기
+      <AppButton variant="primary" block :disabled="!canSend" @click="sendSms">
+        문자로 보내기
       </AppButton>
     </footer>
   </section>
 </template>
 
 <script setup>
-import { computed, reactive } from 'vue'
+import { computed, reactive, ref } from 'vue'
 import ScreenHeader from '@/components/common/ScreenHeader.vue'
 import AppButton from '@/components/common/AppButton.vue'
-import { useClipboard } from '@/composables/useClipboard.js'
 import {
+  CONSENT,
   EMPTY_MARK,
   FIELDS,
-  NOTICE,
   TEMPLATE,
   TOKEN_MAP,
 } from '@/data/reservation.js'
@@ -61,10 +64,11 @@ defineProps({
   canBack: { type: Boolean, default: true },
 })
 
-const emit = defineEmits(['back', 'toast'])
+defineEmits(['back'])
 
 // 입력값은 로컬 상태로만 유지 — 서버 전송/저장 없음
 const form = reactive({ name: '', phone: '', age: '', mbti: '' })
+const agreed = ref(false)
 
 function onInput(key) {
   if (key === 'phone') {
@@ -89,11 +93,23 @@ const preview = computed(() =>
   ),
 )
 
-const { copy } = useClipboard()
+const canSend = computed(() => agreed.value && !!form.phone)
 
-async function handleCopy() {
-  const ok = await copy(preview.value)
-  emit('toast', ok ? '문자 내용이 복사되었어요' : '복사에 실패했어요. 길게 눌러 복사해 주세요')
+function sendSms() {
+  if (!canSend.value) return
+
+  const rawPhone = form.phone.replace(/-/g, '')
+  const text = preview.value
+  const encoded = encodeURIComponent(text)
+  const isIos = /iphone|ipad|ipod/i.test(navigator.userAgent)
+
+  if (isIos) {
+    // iOS: sms://번호?body=내용 (슬래시 두 개가 수신자 번호 인식에 필수)
+    window.location.href = `sms://${rawPhone}?body=${encoded}`
+  } else {
+    // Android: smsto:번호:내용
+    window.location.href = `smsto:${rawPhone}:${text}`
+  }
 }
 </script>
 
@@ -166,50 +182,6 @@ async function handleCopy() {
   }
 }
 
-// ── 프리뷰 ──
-.group_rsv_preview_head {
-  flex-shrink: 0;
-  display: flex;
-  align-items: baseline;
-  gap: 8px;
-  min-width: 0;
-}
-
-.label_rsv_preview {
-  flex-shrink: 0;
-  font-size: 11px;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  color: $caramel;
-}
-
-// 320px 폭에서도 잘리지 않도록 말줄임 대신 줄바꿈을 허용한다
-.desc_rsv_notice {
-  min-width: 0;
-  font-size: 10px;
-  line-height: 1.3;
-  color: rgba(61, 40, 32, 0.42);
-}
-
-.box_rsv_preview {
-  flex: 1;
-  min-height: 0;
-  border: 1px solid $espresso-line;
-  border-radius: $r-md;
-  background: rgba(200, 138, 88, 0.08);
-  padding: 12px;
-  // 문자 원문이 길 수 있어 내부에서만 터치 스크롤을 허용하되,
-  // 스크롤바 자체는 노출하지 않는다.
-  overflow-y: auto;
-  -webkit-overflow-scrolling: touch;
-  overscroll-behavior: contain;
-  scrollbar-width: none;
-
-  &::-webkit-scrollbar {
-    display: none;
-  }
-}
-
 // ── 키보드가 올라온 동안의 컴팩트 모드 ──
 // useVisualViewport 가 <html> 에 data-keyboard="open" 을 붙인다.
 // 컨테이너가 줄어든 만큼 입력 영역도 조여서, 입력창이 잘리지 않게 한다.
@@ -217,27 +189,44 @@ html[data-keyboard='open'] {
   .grid_rsv_fields {
     gap: 6px;
   }
-  .group_rsv_preview_head {
-    display: none;
-  }
   .cont_rsv {
     gap: 6px;
     padding-top: 0;
   }
 }
 
-.txt_rsv_preview {
-  margin: 0;
-  font-family: $font-body;
-  font-size: 12px;
-  line-height: 1.62;
-  color: $espresso;
-  white-space: pre-wrap;
-  word-break: break-word;
+// ── 개인정보 동의 ──
+.wrap_rsv_consent {
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-top: 4px;
+}
 
-  @include small-device {
-    font-size: 11.5px;
-    line-height: 1.5;
-  }
+.txt_rsv_consent_desc {
+  font-size: 10.5px;
+  line-height: 1.45;
+  color: $espresso-soft;
+  word-break: keep-all;
+}
+
+.lbl_rsv_consent {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-family: $font-title;
+  font-size: 12px;
+  font-weight: 500;
+  color: $espresso;
+  cursor: pointer;
+}
+
+.chk_rsv_consent {
+  width: 18px;
+  height: 18px;
+  flex-shrink: 0;
+  accent-color: $caramel;
+  cursor: pointer;
 }
 </style>
