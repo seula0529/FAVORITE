@@ -9,5 +9,5 @@ export const RESULT_COPY = {
   headline: '당신과 가장 닮은 원두',
   descriptionFallback:
     '취향의 결이 비슷한 원두를 찾았어요.\n아래에서 아홉 가지 유형을 모두 만나볼 수 있습니다.',
-  nextCta: '이 진단을 만든 이유 보기',
+  nextCta: '페이보릿의 시작',
 }

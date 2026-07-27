@@ -70,7 +70,7 @@ defineEmits(['back'])
   display: flex;
   align-items: baseline;
   justify-content: flex-end;
-  gap: 8px;
+  gap: 20px;
 }
 
 .label_head {
