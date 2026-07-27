@@ -2,10 +2,13 @@ import { fileURLToPath, URL } from 'node:url'
 import { defineConfig } from 'vite'
 import vue from '@vitejs/plugin-vue'
 
+// GitHub Pages 프로젝트 페이지(https://<user>.github.io/FAVORITE/) 배포용 서브 경로.
+// 커스텀 도메인 등으로 루트 배포 시 '/' 로 되돌리세요.
+// ※ src/styles/_variables.scss 의 $base-url 도 같은 값으로 맞춰야 합니다.
+const base = '/FAVORITE/'
+
 export default defineConfig({
-  // GitHub Pages 등 서브 경로 배포 시 여기를 바꾸면
-  // _fonts.scss 의 /fonts/... 경로도 함께 맞춰야 합니다.
-  base: '/',
+  base,
   plugins: [vue()],
   resolve: {
     alias: {

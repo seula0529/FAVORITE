@@ -5,7 +5,7 @@
     그 전까지는 SCSS 도형 기반 placeholder 가 같은 자리를 차지한다.
   -->
   <figure class="char" :class="{ 'char_light': light }">
-    <img v-if="image" class="img_char" :src="image" :alt="alt" />
+    <img v-if="src" class="img_char" :src="src" :alt="alt" />
     <div v-else class="ph_wrap" aria-hidden="true">
       <span class="ph_bean">
         <span class="ph_crease" />
@@ -21,11 +21,21 @@
 </template>
 
 <script setup>
-defineProps({
+import { computed } from 'vue'
+
+const props = defineProps({
   image: { type: String, default: '' },
   alt: { type: String, default: '' },
   // 어두운 배경 위에 올릴 때
   light: { type: Boolean, default: false },
+})
+
+// data/beans.js 등에는 public/ 기준 루트 절대경로('/images/...')로 들어있어,
+// GitHub Pages 서브 경로 배포 시 깨지지 않도록 base 를 앞에 붙여준다.
+const src = computed(() => {
+  if (!props.image) return ''
+  if (!props.image.startsWith('/')) return props.image
+  return import.meta.env.BASE_URL.replace(/\/$/, '') + props.image
 })
 </script>
 

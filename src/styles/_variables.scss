@@ -4,6 +4,11 @@
 //  → 컴포넌트에서 별도 @use 없이 바로 사용 가능
 // ─────────────────────────────────────────────
 
+// ── 배포 경로 ──
+// GitHub Pages 서브 경로 배포용. vite.config.js 의 base 값과 반드시 동일해야 한다.
+// (public/ 자산을 url() 절대경로로 참조하는 _fonts.scss 등에서 사용)
+$base-url: '/FAVORITE/';
+
 // ── Key Colors ──
 $espresso: #3d2820; // Key 1 — 에스프레소 다크브라운
 $caramel: #c88a58; // Key 2 — 웜 카라멜
