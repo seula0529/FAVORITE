@@ -1,0 +1,75 @@
+// ─────────────────────────────────────────────
+//  예약문자 입력 화면 — 더미 콘텐츠
+//
+//  ⚠️ TEMPLATE 은 실제 TM 문자 양식이 확정되면 그대로 갈아끼우면 된다.
+//     치환부는 {이름} {연락처} {나이} {MBTI} 토큰만 유지할 것.
+// ─────────────────────────────────────────────
+
+export const FIELDS = [
+  {
+    key: 'name',
+    label: '이름',
+    placeholder: '홍길동',
+    type: 'text',
+    inputmode: 'text',
+    autocomplete: 'name',
+    maxlength: 20,
+  },
+  {
+    key: 'phone',
+    label: '연락처',
+    placeholder: '010-0000-0000',
+    type: 'tel',
+    inputmode: 'tel',
+    autocomplete: 'tel',
+    maxlength: 13,
+  },
+  {
+    key: 'age',
+    label: '나이',
+    placeholder: '28',
+    type: 'text',
+    inputmode: 'numeric',
+    autocomplete: 'off',
+    maxlength: 3,
+  },
+  {
+    key: 'mbti',
+    label: 'MBTI',
+    placeholder: 'ENFP',
+    type: 'text',
+    inputmode: 'text',
+    autocomplete: 'off',
+    maxlength: 4,
+  },
+]
+
+// 입력 필드 key ↔ 템플릿 토큰 매핑
+export const TOKEN_MAP = {
+  name: '{이름}',
+  phone: '{연락처}',
+  age: '{나이}',
+  mbti: '{MBTI}',
+}
+
+// TODO: 실제 TM 문자 양식 원문으로 교체
+export const TEMPLATE = `[FAVORITE 원두 시향 예약 안내]
+
+{이름} 고객님, 안녕하세요.
+원두 성향 진단 참여해 주셔서 감사합니다.
+
+· 성함 : {이름}
+· 연락처 : {연락처}
+· 나이 : {나이}
+· MBTI : {MBTI}
+
+위 정보로 시향 예약이 접수되었습니다.
+일정은 담당자가 순차적으로 안내드릴 예정입니다.
+
+문의는 본 번호로 회신 부탁드립니다.
+감사합니다.`
+
+// 미입력 시 프리뷰에 표시할 값
+export const EMPTY_MARK = '—'
+
+export const NOTICE = '저장·전송되지 않습니다'

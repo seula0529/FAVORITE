@@ -1,0 +1,110 @@
+@use 'fonts';
+@use 'reset';
+
+// ─────────────────────────────────────────────
+//  앱 셸 레이아웃
+//  - 스크롤바가 절대 생기지 않는 100dvh 고정 구조
+//  - position: fixed 미사용 (인스타 버튼은 .wrap_app 기준 absolute)
+// ─────────────────────────────────────────────
+
+.wrap_app {
+  // --app-height: 모바일 키보드가 올라올 때 visualViewport 로 보정되는 값
+  // (useVisualViewport.js). 미지원/키보드 없음 → 100dvh 그대로.
+  height: 100dvh;
+  height: var(--app-height, 100dvh);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  position: relative; // 인스타 버튼 absolute 기준점
+  padding: $gutter-y $gutter-x;
+  padding-top: max(#{$gutter-y}, env(safe-area-inset-top));
+  padding-bottom: max(#{$gutter-y}, env(safe-area-inset-bottom));
+  box-sizing: border-box;
+  background: $milk-foam;
+  transition: height 0.2s ease;
+}
+
+// 화면들이 겹쳐 쌓이는 무대. 여기서 flex:1 + min-height:0 을 잡아
+// 내부 .section_common 들이 절대 넘치지 않게 한다.
+.area_stack {
+  flex: 1;
+  min-height: 0;
+  position: relative;
+}
+
+// ── 화면 공통 전환 (기존 프로젝트 방식 그대로) ──
+// 새 화면은 아래(below)에서 위로 올라오고, 지나간 화면은 위(above)로 빠진다.
+.section_common {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  transition:
+    transform $dur-slide $ease-slide,
+    opacity $dur-slide ease;
+  will-change: transform, opacity;
+}
+.section_common.active {
+  transform: translateY(0);
+  opacity: 1;
+  pointer-events: auto;
+}
+.section_common.above {
+  transform: translateY(-100%);
+  opacity: 0;
+  pointer-events: none;
+}
+.section_common.below {
+  transform: translateY(100%);
+  opacity: 0;
+  pointer-events: none;
+}
+// 비활성 화면이 포커스를 훔치거나 스크린리더에 읽히지 않도록
+.section_common:not(.active) {
+  visibility: hidden;
+  transition:
+    transform $dur-slide $ease-slide,
+    opacity $dur-slide ease,
+    visibility 0s linear $dur-slide;
+}
+
+// ── 화면 내부 3단 구조 ──
+.header_screen {
+  height: $bar-h;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  // 우측 상단 인스타 버튼과 겹치지 않도록 여백 확보
+  padding-right: $tap-min + 8px;
+}
+
+.cont_screen {
+  flex: 1;
+  min-height: 0; // 필수 — 내부 요소가 부모를 밀어내지 않게
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.footer_screen {
+  height: $bar-h;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+// ── 타이포 유틸 ──
+.tit_txt {
+  font-family: $font-title;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  line-height: 1.28;
+}
+.txt_label {
+  font-family: $font-title;
+  font-weight: 500;
+  letter-spacing: 0.02em;
+}

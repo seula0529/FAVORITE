@@ -1,0 +1,72 @@
+// ─────────────────────────────────────────────
+//  로컬 폰트 등록 (CDN 사용 금지)
+//
+//  파일 위치: public/fonts/
+//  → public/ 은 Vite 가 번들링하지 않고 그대로 서빙하므로,
+//    폰트 파일이 아직 없어도 빌드가 깨지지 않는다.
+//    (src/assets 에 두면 파일 부재 시 "Failed to resolve" 로 빌드 실패)
+//  → 아래 파일명 그대로 public/fonts/ 에 넣으면 즉시 적용된다.
+//
+//  vite.config.js 의 base 를 서브 경로로 바꿀 경우
+//  아래 url() 앞에도 같은 경로를 붙여야 한다.
+// ─────────────────────────────────────────────
+
+// ── 본문: Pretendard ──
+@font-face {
+  font-family: 'Pretendard';
+  src:
+    url('/fonts/Pretendard-Regular.woff2') format('woff2');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Pretendard';
+  src:
+    url('/fonts/Pretendard-Medium.woff2') format('woff2');
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Pretendard';
+  src:
+    url('/fonts/Pretendard-SemiBold.woff2') format('woff2');
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Pretendard';
+  src:
+    url('/fonts/Pretendard-Bold.woff2') format('woff2');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+// ── 타이틀 / 강조: Spoqa Han Sans Neo ──
+@font-face {
+  font-family: 'Spoqa Han Sans Neo';
+  src:
+    url('/fonts/SpoqaHanSansNeo-Regular.otf') format('opentype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Spoqa Han Sans Neo';
+  src:
+    url('/fonts/SpoqaHanSansNeo-Medium.otf') format('opentype');
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Spoqa Han Sans Neo';
+  src:
+    url('/fonts/SpoqaHanSansNeo-Bold.otf') format('opentype');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}

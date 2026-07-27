@@ -1,0 +1,9 @@
+node_modules
+dist
+dist-ssr
+*.local
+.DS_Store
+.vite
+
+# 폰트 원본(용량 큼) — 필요 시 주석 해제
+# public/fonts/*.woff2

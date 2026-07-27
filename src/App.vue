@@ -1,0 +1,120 @@
+<template>
+  <div class="wrap_app" :data-direction="direction">
+    <!-- 우측 상단 인스타 링크 (.wrap_app 기준 absolute) -->
+    <InstagramLink :href="INSTAGRAM_URL" />
+
+    <!-- 화면 6개가 겹쳐 쌓이는 무대 -->
+    <div class="area_stack">
+      <CoverScreen
+        :screen-class="screenClass('cover')"
+        @start="startForm"
+        @reserve="go('reservation')"
+      />
+
+      <FormScreen
+        :screen-class="screenClass('form')"
+        :questions="QUESTIONS"
+        :answers="answers"
+        :step="formStep"
+        :can-back="canGoBack"
+        @select="select"
+        @next="nextQuestion"
+        @back="back"
+      />
+
+      <ResultScreen
+        :screen-class="screenClass('result')"
+        :active="currentScreen === 'result'"
+        :bean="resultBean"
+        :can-back="canGoBack"
+        @next="go('purpose')"
+        @back="back"
+      />
+
+      <PurposeScreen
+        :screen-class="screenClass('purpose')"
+        :active="currentScreen === 'purpose'"
+        :can-back="canGoBack"
+        @next="go('beans')"
+        @back="back"
+      />
+
+      <BeansScreen
+        :screen-class="screenClass('beans')"
+        :active="currentScreen === 'beans'"
+        :can-back="canGoBack"
+        @next="go('reservation')"
+        @back="back"
+      />
+
+      <ReservationScreen
+        :screen-class="screenClass('reservation')"
+        :can-back="canGoBack"
+        @back="back"
+        @toast="showToast"
+      />
+    </div>
+
+    <AppToast :show="toast.show" :message="toast.message" />
+  </div>
+</template>
+
+<script setup>
+import { computed, reactive, ref, watch } from 'vue'
+
+import InstagramLink from '@/components/common/InstagramLink.vue'
+import AppToast from '@/components/common/AppToast.vue'
+import CoverScreen from '@/components/screens/CoverScreen.vue'
+import FormScreen from '@/components/screens/FormScreen.vue'
+import ResultScreen from '@/components/screens/ResultScreen.vue'
+import PurposeScreen from '@/components/screens/PurposeScreen.vue'
+import BeansScreen from '@/components/screens/BeansScreen.vue'
+import ReservationScreen from '@/components/screens/ReservationScreen.vue'
+
+import { screenOf, stepOf, useHistory } from '@/composables/useHistory.js'
+import { useFormState } from '@/composables/useFormState.js'
+import { useVisualViewport } from '@/composables/useVisualViewport.js'
+import { getResultType } from '@/logic/getResultType.js'
+import { INSTAGRAM_URL } from '@/data/cover.js'
+
+// ── 화면 전환: Vue Router 없이 히스토리 스택으로만 관리 ──
+// 스택 엔트리: 'cover' | 'form:0' … 'form:4' | 'result' | 'purpose' | 'beans' | 'reservation'
+const { current, currentScreen, canGoBack, direction, go, back, screenClass } =
+  useHistory('cover')
+
+// ── 폼지 상태 ──
+const { QUESTIONS, answers, select, payload } = useFormState()
+
+// 화면을 벗어나도 마지막 문항을 유지하기 위해 별도 보관
+const formStep = ref(0)
+watch(current, (entry) => {
+  if (screenOf(entry) !== 'form') return
+  const step = stepOf(entry)
+  if (step !== null && !Number.isNaN(step)) formStep.value = step
+})
+
+const startForm = () => go('form:0')
+
+function nextQuestion() {
+  const step = formStep.value
+  if (step < QUESTIONS.length - 1) go(`form:${step + 1}`)
+  else go('result')
+}
+
+// ── 결과 ──
+// 판정 로직은 아직 비어 있다 (getResultType 내부 TODO)
+const resultBean = computed(() => getResultType(payload.value))
+
+// ── 토스트 ──
+const toast = reactive({ show: false, message: '' })
+let toastTimer = null
+function showToast(message) {
+  clearTimeout(toastTimer)
+  toast.message = message
+  toast.show = true
+  toastTimer = setTimeout(() => (toast.show = false), 2000)
+}
+
+// ── 모바일 키보드 대응 (visualViewport → --app-height) ──
+useVisualViewport()
+</script>
