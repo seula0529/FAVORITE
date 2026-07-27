@@ -186,7 +186,7 @@ watch(
   flex-direction: column;
   align-items: center;
   text-align: center;
-  padding: 16px 14px;
+  padding: 25px 15px;
 }
 
 // 그라데이션은 유형마다 밝기가 크게 다르다.
@@ -232,11 +232,11 @@ watch(
 
 .label_bean_type {
   flex-shrink: 0;
-  font-size: 12px;
+  font-size: 16px;
   opacity: 0.82;
 
   @include small-device {
-    font-size: 11px;
+    font-size: 14px;
   }
 }
 
@@ -244,16 +244,19 @@ watch(
   flex: 1;
   min-height: 0;
   width: 100%;
-  padding: 8px 0;
+  padding: 10px 0;
 }
 
 .tit_bean {
   flex-shrink: 0;
-  font-size: 21px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 15px;
+  font-size: 22px;
   line-height: 1.2;
-
   @include small-device {
-    font-size: 19px;
+    font-size: 20px;
   }
 }
 
@@ -270,7 +273,6 @@ watch(
   letter-spacing: 0.14em;
   text-transform: uppercase;
   opacity: 0.72;
-  margin-top: 3px;
 }
 
 .group_bean_tags {
@@ -278,8 +280,8 @@ watch(
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  gap: 4px;
-  margin-top: 9px;
+  gap:8px;
+  margin-top: 10px;
 }
 
 // ── 좌우 컨트롤 ──

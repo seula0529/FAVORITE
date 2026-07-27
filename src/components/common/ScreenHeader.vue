@@ -94,7 +94,6 @@ defineEmits(['back'])
   b {
     font-weight: 700;
     color: $espresso;
-    font-size: 16px;
   }
 }
 </style>

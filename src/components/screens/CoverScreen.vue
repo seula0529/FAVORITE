@@ -46,7 +46,7 @@ defineEmits(['start', 'reserve'])
 .cont_cover {
   align-items: center;
   text-align: center;
-  padding: 4px 0 8px;
+  padding: 5px 0 20px;
 }
 
 .area_cover_top {
@@ -55,16 +55,16 @@ defineEmits(['start', 'reserve'])
 
 .label_cover_eyebrow {
   font-family: $font-title;
-  font-size: 14px;
+  font-size: 16px;
   font-weight: 500;
-  letter-spacing: 0.16em;
+  letter-spacing: -0.1px;
   text-transform: uppercase;
   color: $caramel;
-  margin-bottom: 10px;
+  margin-bottom: 12px;
 }
 
 .tit_cover {
-  font-size: 46px;
+  font-size: 42px;
   line-height: 0.9;
   color: $espresso;
 
@@ -73,7 +73,7 @@ defineEmits(['start', 'reserve'])
     font-weight: 500;
     letter-spacing: 0.02em;
     opacity: 0.55;
-    font-size: 0.52em;
+    font-size: 30px;
   }
   em {
     display: block;
@@ -87,7 +87,6 @@ defineEmits(['start', 'reserve'])
   flex: 1;
   min-height: 0;
   width: 90%;
-  padding: 10px 0;
   opacity: 0.85;
 }
 

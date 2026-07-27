@@ -122,6 +122,7 @@ const cardClass = (qi) => {
   inset: 0;
   display: flex;
   flex-direction: column;
+  justify-content: center;
   padding-top: 18px;
   transition:
     transform $dur-slide $ease-slide,
@@ -149,33 +150,27 @@ const cardClass = (qi) => {
 .tit_q {
   flex-shrink: 0;
   white-space: pre-line;
-  font-size: clamp(19px, 5.6vw, 23px);
+  font-size: 22px;
   color: $espresso;
-  margin-bottom: 18px;
+  margin-bottom: 20px;
 
-  @include small-device {
-    font-size: 18px;
-    margin-bottom: 12px;
-  }
 }
 
 // 옵션은 남는 높이를 나눠 갖는다 → 어떤 화면에서도 스크롤이 생기지 않음
 .group_q_options {
-  flex: 1;
   min-height: 0;
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  justify-content: center;
+  gap: 10px;
 }
 
 .btn_q_option {
-  flex: 1 1 0;
-  min-height: 48px;
-  max-height: 72px;
+  flex: 1 1 50px;
   display: flex;
   align-items: center;
   gap: 12px;
-  padding: 0 14px;
+  padding: 6px 12px;
   border: 1px solid $espresso-line;
   border-radius: $r-md;
   background: rgba(250, 247, 242, 0.6);

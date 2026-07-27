@@ -27,7 +27,7 @@ defineEmits(['click'])
   justify-content: center;
   gap: 10px;
   // 터치 영역 최소 44px 확보
-  min-height: $tap-min;
+  min-height: $tap-min + 4px;
   min-width: $tap-min;
   padding: 0 20px;
   border-radius: $r-pill;
