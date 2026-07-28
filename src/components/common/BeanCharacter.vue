@@ -50,9 +50,10 @@ const src = computed(() => {
 }
 
 .img_char {
-  width: 100%;
-  height: auto;
-  object-fit: cover;
+  width: auto;
+  height: 60%;
+  max-width: 100%;
+  object-fit: contain;
 }
 
 // ── SCSS 도형 placeholder ──
