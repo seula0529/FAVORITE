@@ -76,8 +76,8 @@
   display: flex;
   align-items: center;
   gap: 8px;
-  // 우측 상단 인스타 버튼과 겹치지 않도록 여백 확보
-  padding-right: $tap-min + 8px;
+  // 우측 상단 아이콘(첫 화면 이동 + 인스타) 2개와 겹치지 않도록 여백 확보
+  padding-right: ($tap-min * 2) + 16px;
 }
 
 .cont_screen {

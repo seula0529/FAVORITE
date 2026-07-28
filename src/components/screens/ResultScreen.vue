@@ -8,8 +8,17 @@
 
       <p class="label_result_headline">{{ RESULT_COPY.headline }}</p>
 
-      <!-- 뽑기 당첨 연출: CSS 3D Flip -->
-      <div class="area_flip_scene">
+      <!-- 뽑기 당첨 연출: CSS 3D Flip. 클릭/터치로 뒤집는다 -->
+      <div
+        class="area_flip_scene"
+        role="button"
+        tabindex="0"
+        :aria-pressed="flipped"
+        :aria-label="flipped ? '결과 카드' : RESULT_COPY.cardBackHint"
+        @click="toggleFlip"
+        @keydown.enter.prevent="toggleFlip"
+        @keydown.space.prevent="toggleFlip"
+      >
         <div class="card_flip" :class="{ flipped: flipped }">
           <!-- 뒷면(처음 보이는 면) -->
           <div class="face_flip face_flip_back">
@@ -28,7 +37,7 @@
             <p class="label_flip_front_type txt_label">Type {{ bean.typeNo }}. {{ bean.subtitle }}</p>
             <div class="visual_flip_front">
               <BeanCharacter
-                :image="bean.image"
+                :image="bean.resultImage || bean.image"
                 :alt="bean.nameKo"
                 :light="bean.ink === 'light'"
               />
@@ -78,6 +87,7 @@ defineEmits(['next', 'back'])
 
 const canvasEl = ref(null)
 const flipped = ref(false)
+const confettiFired = ref(false)
 let timers = []
 let fire = null
 
@@ -113,23 +123,22 @@ function launchConfetti() {
   )
 }
 
-// 화면에 진입할 때마다 카드가 처음부터 뒤집힌다
+// 클릭/터치로 카드를 뒤집는다. 최초로 결과가 보이는 순간에만 컨페티가 터진다.
+function toggleFlip() {
+  flipped.value = !flipped.value
+  if (flipped.value && !confettiFired.value) {
+    confettiFired.value = true
+    timers.push(setTimeout(launchConfetti, 850))
+  }
+}
+
+// 화면을 벗어나면 다음 진입 시 다시 뒷면부터 보이도록 리셋
 watch(
   () => props.active,
   (isActive) => {
     clearTimers()
-    if (!isActive) {
-      flipped.value = false
-      return
-    }
-
-    if (prefersReducedMotion()) {
-      flipped.value = true
-      return
-    }
-
-    timers.push(setTimeout(() => (flipped.value = true), 420))
-    timers.push(setTimeout(launchConfetti, 1000))
+    flipped.value = false
+    if (!isActive) confettiFired.value = false
   },
   { immediate: true },
 )
@@ -176,6 +185,8 @@ onBeforeUnmount(() => {
   max-width: 300px;
   aspect-ratio: 3 / 4;
   perspective: 1200px;
+  cursor: pointer;
+  outline-offset: 6px;
 }
 
 .card_flip {

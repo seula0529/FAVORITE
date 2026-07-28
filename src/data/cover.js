@@ -12,5 +12,3 @@ export const COVER = {
   secondaryCta: '예약 문자 전송',
   image: '/images/bean_basic.png', // 캐릭터 이미지가 생기면 여기에 경로만 넣으면 된다
 }
-
-export const INSTAGRAM_URL = 'https://www.instagram.com/hello_naya_baking_studio'

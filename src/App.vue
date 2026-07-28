@@ -1,7 +1,8 @@
 <template>
   <div class="wrap_app" :data-direction="direction">
-    <!-- 우측 상단 인스타 링크 (.wrap_app 기준 absolute) -->
-    <InstagramLink :href="INSTAGRAM_URL" />
+    <!-- 우측 상단 아이콘 (.wrap_app 기준 absolute): 첫 화면 이동(커버 제외) + 인스타 -->
+    <HomeLink v-if="currentScreen !== 'cover'" @click="reset" />
+    <InstagramLink @open="instaOpen = true" />
 
     <!-- 화면 6개가 겹쳐 쌓이는 무대 -->
     <div class="area_stack">
@@ -53,6 +54,12 @@
         @back="back"
       />
     </div>
+
+    <InstagramModal
+      :open="instaOpen"
+      :images="INSTAGRAM_IMAGES"
+      @close="instaOpen = false"
+    />
   </div>
 </template>
 
@@ -60,6 +67,8 @@
 import { computed, ref, watch } from 'vue'
 
 import InstagramLink from '@/components/common/InstagramLink.vue'
+import InstagramModal from '@/components/common/InstagramModal.vue'
+import HomeLink from '@/components/common/HomeLink.vue'
 import CoverScreen from '@/components/screens/CoverScreen.vue'
 import FormScreen from '@/components/screens/FormScreen.vue'
 import ResultScreen from '@/components/screens/ResultScreen.vue'
@@ -71,12 +80,15 @@ import { screenOf, stepOf, useHistory } from '@/composables/useHistory.js'
 import { useFormState } from '@/composables/useFormState.js'
 import { useVisualViewport } from '@/composables/useVisualViewport.js'
 import { getResultType } from '@/logic/getResultType.js'
-import { INSTAGRAM_URL } from '@/data/cover.js'
+import { INSTAGRAM_IMAGES } from '@/data/instagram.js'
 
 // ── 화면 전환: Vue Router 없이 히스토리 스택으로만 관리 ──
 // 스택 엔트리: 'cover' | 'form:0' … 'form:4' | 'result' | 'purpose' | 'beans' | 'reservation'
-const { current, currentScreen, canGoBack, direction, go, back, screenClass } =
+const { current, currentScreen, canGoBack, direction, go, back, reset, screenClass } =
   useHistory('cover')
+
+// ── 인스타그램 이미지 팝업 ──
+const instaOpen = ref(false)
 
 // ── 폼지 상태 ──
 const { QUESTIONS, answers, select, payload } = useFormState()

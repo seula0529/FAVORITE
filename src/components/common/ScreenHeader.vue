@@ -1,9 +1,9 @@
 <template>
   <header class="header_screen">
     <button
+      v-if="canBack"
       class="btn_back"
       type="button"
-      :disabled="!canBack"
       aria-label="이전으로"
       @click="$emit('back')"
     >
@@ -53,14 +53,9 @@ defineEmits(['back'])
   justify-content: center;
   border-radius: 50%;
   color: $espresso;
-  transition:
-    opacity 0.2s ease,
-    background 0.2s ease;
+  transition: background 0.2s ease;
 }
-.btn_back:disabled {
-  opacity: 0.25;
-}
-.btn_back:active:not(:disabled) {
+.btn_back:active {
   background: $caramel-soft;
 }
 

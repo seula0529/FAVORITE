@@ -1,42 +1,41 @@
 <template>
   <!--
-    position: fixed 를 쓰지 않는다.
-    .wrap_app(position: relative) 기준 absolute 로 우측 상단에 고정.
-    계정으로 이동하지 않고, 레이어 팝업(InstagramModal)을 연다.
+    상단 우측 '첫 화면으로 이동' 버튼.
+    인스타 버튼과 같은 방식으로 .wrap_app 기준 absolute, 인스타 버튼 왼쪽에 나란히 위치.
+    커버 화면에서는 App.vue 에서 렌더링 자체를 하지 않는다.
   -->
   <button
-    class="link_insta"
+    class="link_home"
     type="button"
-    aria-label="인스타그램 이미지 보기"
-    @click="$emit('open')"
+    aria-label="첫 화면으로 이동"
+    @click="$emit('click')"
   >
     <svg
-      width="19"
-      height="19"
+      width="18"
+      height="18"
       viewBox="0 0 24 24"
       fill="none"
       stroke="currentColor"
-      stroke-width="1.6"
+      stroke-width="1.8"
       stroke-linecap="round"
       stroke-linejoin="round"
       aria-hidden="true"
     >
-      <rect x="2" y="2" width="20" height="20" rx="5.5" />
-      <circle cx="12" cy="12" r="4.2" />
-      <circle cx="17.6" cy="6.4" r="1.1" fill="currentColor" stroke="none" />
+      <path d="M3 11.5 12 4l9 7.5" />
+      <path d="M5.5 9.8V19a1 1 0 0 0 1 1H9a1 1 0 0 0 1-1v-4a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v4a1 1 0 0 0 1 1h2.5a1 1 0 0 0 1-1V9.8" />
     </svg>
   </button>
 </template>
 
 <script setup>
-defineEmits(['open'])
+defineEmits(['click'])
 </script>
 
 <style scoped lang="scss">
-.link_insta {
+.link_home {
   position: absolute;
   top: max(#{$gutter-y}, env(safe-area-inset-top));
-  right: $gutter-x;
+  right: calc(#{$gutter-x} + #{$tap-min} + 8px);
   z-index: 30;
   width: $tap-min;
   height: $tap-min;
@@ -52,7 +51,7 @@ defineEmits(['open'])
     background 0.2s ease,
     transform 0.12s ease;
 }
-.link_insta:active {
+.link_home:active {
   transform: scale(0.93);
   background: $caramel-soft;
 }

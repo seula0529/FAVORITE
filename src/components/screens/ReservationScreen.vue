@@ -115,6 +115,7 @@ function sendSms() {
 
 <style scoped lang="scss">
 .cont_rsv {
+  justify-content: center;
   padding-top: 4px;
   gap: 10px;
 }
@@ -190,6 +191,7 @@ html[data-keyboard='open'] {
     gap: 6px;
   }
   .cont_rsv {
+    justify-content: flex-start;
     gap: 6px;
     padding-top: 0;
   }

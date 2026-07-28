@@ -2,13 +2,15 @@
 //  원두 9종 (확정 콘텐츠)
 //
 //  구조:
-//  { id, typeNo, emoji, subtitle, nameKo, nameEn, image,
+//  { id, typeNo, emoji, subtitle, nameKo, nameEn, image, resultImage,
 //    gradient: [색1, 색2], ink, tags: ['','',''], pursuit }
 //
-//   - subtitle : 유형 이름 → 카드 상단 `Type 01. 개혁가`
-//   - nameKo/En: 캐릭터 이름 → 카드 하단 `밸런서 Balancer`
-//   - image    : 캐릭터 플랫 그래픽. 빈 문자열이면 SCSS 도형 placeholder 가 렌더된다.
-//   - gradient : 카드 배경 2톤 대각선 그라데이션 [시작, 끝]
+//   - subtitle    : 유형 이름 → 카드 상단 `Type 01. 개혁가`
+//   - nameKo/En   : 캐릭터 이름 → 카드 하단 `밸런서 Balancer`
+//   - image       : 캐릭터 플랫 그래픽. 빈 문자열이면 SCSS 도형 placeholder 가 렌더된다.
+//   - resultImage : 결과 화면(폼지 결과) 카드 전용 이미지. 없으면 image 로 대체된다.
+//                   (현재 summ_bean_type1~4.png 만 준비됨 — 나머지는 추후 추가)
+//   - gradient    : 카드 배경 2톤 대각선 그라데이션 [시작, 끝]
 //   - ink      : 그 배경 위에 얹을 글자색 계열. 'dark' | 'light'
 //                밝은 그라데이션(케어러·챌린저 등)에 흰 글자를 쓰면 안 읽히므로
 //                유형별로 명시한다. Pill Badge · 캐릭터 톤도 이 값을 따라간다.
@@ -24,6 +26,7 @@ export const BEANS = [
     nameKo: '밸런서',
     nameEn: 'Balancer',
     image: '/images/bean_type1.png',
+    resultImage: '/images/summ_bean_type1.png',
     // Warm Taupe → Soft Chocolate : 느림과 차분함, 균형 잡힌 딥 브라운 톤
     gradient: ['#D7CCC8', '#8D6E63'],
     ink: 'dark',
@@ -37,6 +40,7 @@ export const BEANS = [
     nameKo: '케어러',
     nameEn: 'Carer',
     image: '/images/bean_type2.png',
+    resultImage: '/images/summ_bean_type2.png',
     // Sweet Honey Yellow → Warm Peach : 따뜻하고 달콤한 파스텔 옐로우 오렌지
     gradient: ['#FFF59D', '#FFCC80'],
     ink: 'dark',
@@ -50,6 +54,7 @@ export const BEANS = [
     nameKo: '챌린저',
     nameEn: 'Challenger',
     image: '/images/bean_type3.png',
+    resultImage: '/images/summ_bean_type3.png',
     // Bright Citrus Yellow → Vivid Red Orange : 톡 쏘는 에너지와 생기
     gradient: ['#FFEE58', '#FF7043'],
     ink: 'dark',
@@ -63,6 +68,7 @@ export const BEANS = [
     nameKo: '크리에이터',
     nameEn: 'Creator',
     image: '/images/bean_type4.png',
+    resultImage: '/images/summ_bean_type4.png',
     // Soft Lavender → Berry Purple : 감성적이고 감각적인 보랏빛 플로럴 톤
     gradient: ['#E1BEE7', '#AB47BC'],
     ink: 'dark',

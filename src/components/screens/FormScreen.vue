@@ -134,13 +134,13 @@ const cardClass = (qi) => {
     pointer-events: auto;
   }
   &.above {
-    transform: translateY(-24%);
+    transform: translateY(-100%);
     opacity: 0;
     pointer-events: none;
     visibility: hidden;
   }
   &.below {
-    transform: translateY(24%);
+    transform: translateY(100%);
     opacity: 0;
     pointer-events: none;
     visibility: hidden;

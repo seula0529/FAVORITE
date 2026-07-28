@@ -5,7 +5,7 @@
 export const RESULT_COPY = {
   eyebrow: 'Your Bean',
   cardBackLabel: 'FAVORITE',
-  cardBackHint: '카드를 뒤집는 중…',
+  cardBackHint: '카드를 눌러 결과 확인하기',
   headline: '당신과 가장 닮은 원두',
   descriptionFallback:
     '취향의 결이 비슷한 원두를 찾았어요.\n아래에서 아홉 가지 유형을 모두 만나볼 수 있습니다.',

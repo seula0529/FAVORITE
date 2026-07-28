@@ -54,53 +54,9 @@
     </div>
 
     <footer class="footer_screen footer_beans">
-      <button
-        type="button"
-        class="btn_beans_nav"
-        :disabled="isBeginning"
-        aria-label="이전 원두"
-        @click="prev"
-      >
-        <svg
-          width="18"
-          height="18"
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="currentColor"
-          stroke-width="2"
-          stroke-linecap="round"
-          stroke-linejoin="round"
-          aria-hidden="true"
-        >
-          <path d="M15 18l-6-6 6-6" />
-        </svg>
-      </button>
-
-      <AppButton class="btn_beans_cta" variant="primary" @click="$emit('next')">
+      <AppButton class="btn_beans_cta" variant="primary" block @click="$emit('next')">
         예약 문자 작성하기
       </AppButton>
-
-      <button
-        type="button"
-        class="btn_beans_nav"
-        :disabled="isEnd"
-        aria-label="다음 원두"
-        @click="next"
-      >
-        <svg
-          width="18"
-          height="18"
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="currentColor"
-          stroke-width="2"
-          stroke-linecap="round"
-          stroke-linejoin="round"
-          aria-hidden="true"
-        >
-          <path d="M9 6l6 6-6 6" />
-        </svg>
-      </button>
     </footer>
   </section>
 </template>
@@ -126,14 +82,10 @@ defineEmits(['next', 'back'])
 
 let swiper = null
 const activeIndex = ref(0)
-const isBeginning = ref(true)
-const isEnd = ref(false)
 
 function syncState() {
   if (!swiper) return
   activeIndex.value = swiper.activeIndex
-  isBeginning.value = swiper.isBeginning
-  isEnd.value = swiper.isEnd
 }
 
 const onSwiper = (instance) => {
@@ -141,9 +93,6 @@ const onSwiper = (instance) => {
   syncState()
 }
 const onSlideChange = () => syncState()
-
-const prev = () => swiper?.slidePrev()
-const next = () => swiper?.slideNext()
 
 watch(
   () => props.active,
@@ -282,35 +231,6 @@ watch(
   justify-content: center;
   gap:8px;
   margin-top: 10px;
-}
-
-// ── 좌우 컨트롤 ──
-.footer_beans {
-  gap: 8px;
-}
-
-.btn_beans_nav {
-  flex-shrink: 0;
-  width: $tap-min;
-  height: $tap-min;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border-radius: 50%;
-  border: 1px solid $espresso-line;
-  color: $espresso;
-  transition:
-    opacity 0.2s ease,
-    background 0.2s ease,
-    transform 0.12s ease;
-
-  &:disabled {
-    opacity: 0.24;
-  }
-  &:active:not(:disabled) {
-    background: $caramel-soft;
-    transform: scale(0.94);
-  }
 }
 
 .btn_beans_cta {
