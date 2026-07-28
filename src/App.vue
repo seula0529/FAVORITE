@@ -27,6 +27,7 @@
         :screen-class="screenClass('result')"
         :active="currentScreen === 'result'"
         :bean="resultBean"
+        :answers="payload"
         :can-back="canGoBack"
         @next="go('purpose')"
         @back="back"

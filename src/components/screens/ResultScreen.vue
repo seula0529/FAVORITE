@@ -55,6 +55,8 @@ const props = defineProps({
   screenClass: { type: String, default: '' },
   active: { type: Boolean, default: false },
   bean: { type: Object, required: true },
+  // 폼지 응답 [{ id, value }] — 4종 결과 카드 판정에 쓰인다
+  answers: { type: Array, default: () => [] },
   canBack: { type: Boolean, default: true },
 })
 
@@ -69,8 +71,8 @@ const resolveSrc = (src) => {
 const canvasEl = ref(null)
 const flipped = ref(false)
 const confettiFired = ref(false)
-// 원두 성향(9종)과 무관하게, 화면에 들어올 때마다 결과 카드 4종 중 하나를 새로 뽑는다
-const resultCard = ref(pickResultCard())
+// 원두 성향(9종)과는 별개로, 폼지 응답에 따라 결과 카드 4종 중 하나가 정해진다
+const resultCard = ref(pickResultCard(props.answers))
 let timers = []
 let fire = null
 
@@ -122,7 +124,7 @@ watch(
     clearTimers()
     flipped.value = false
     if (isActive) {
-      resultCard.value = pickResultCard()
+      resultCard.value = pickResultCard(props.answers)
     } else {
       confettiFired.value = false
     }
