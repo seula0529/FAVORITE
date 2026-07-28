@@ -88,6 +88,7 @@ defineEmits(['start', 'reserve'])
   min-height: 0;
   width: 90%;
   opacity: 0.85;
+  padding: 10px 0;
 }
 
 .area_cover_bottom {

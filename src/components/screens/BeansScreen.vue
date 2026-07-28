@@ -120,6 +120,7 @@ watch(
   width: 100%;
   flex: 1;
   min-height: 0;
+  padding: 10px 0;
 }
 
 .desc_beans {
