@@ -140,12 +140,14 @@ watch(
   justify-content: center;
 }
 
-// 3:4 비율. 폭 기준으로 잡고, 세로가 부족하면 shrink 로 줄어든다.
+// 3:4 비율. 슬라이드 영역 높이 기준으로 잡고, 폭은 비율에 맞춰 따라온다.
 .card_bean {
   position: relative;
   flex: 0 1 auto;
   min-height: 0;
-  width: 100%;
+  height: 100%;
+  width: auto;
+  max-width: 100%;
   aspect-ratio: 3 / 4;
   border-radius: $r-md;
   overflow: hidden;
