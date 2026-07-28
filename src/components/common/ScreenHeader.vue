@@ -66,6 +66,7 @@ defineEmits(['back'])
   align-items: baseline;
   justify-content: flex-end;
   gap: 20px;
+  margin-right:15px;
 }
 
 .label_head {

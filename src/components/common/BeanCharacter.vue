@@ -51,6 +51,7 @@ const src = computed(() => {
 
 .img_char {
   width: 80%;
+  max-height: 50vh;
   object-fit: contain;
 }
 

@@ -4,7 +4,7 @@
 
 export const RESULT_COPY = {
   eyebrow: 'Your Bean',
-  cardBackLabel: 'FAVORITE',
+  // 뒷면에는 텍스트를 표시하지 않는다 — 스크린리더용 aria-label 로만 사용
   cardBackHint: '카드를 눌러 결과 확인하기',
   headline: '당신과 가장 닮은 원두',
   descriptionFallback:

@@ -20,38 +20,14 @@
         @keydown.space.prevent="toggleFlip"
       >
         <div class="card_flip" :class="{ flipped: flipped }">
-          <!-- 뒷면(처음 보이는 면) -->
-          <div class="face_flip face_flip_back">
-            <span class="tit_flip_back">{{ RESULT_COPY.cardBackLabel }}</span>
-            <span class="desc_flip_back_hint">{{ RESULT_COPY.cardBackHint }}</span>
+          <!-- 카드 앞면(뒤집기 전 바로 보이는 면) — 원두 9종과 무관한 결과 카드 이미지 -->
+          <div class="face_flip face_flip_a">
+            <img class="img_flip_face" :src="resolveSrc(resultCard.frontImage)" alt="" />
           </div>
 
-          <!-- 앞면(결과) -->
-          <div
-            class="face_flip face_flip_front"
-            :class="`face_flip_ink_${bean.ink}`"
-            :style="{
-              backgroundImage: `linear-gradient(140deg, ${bean.gradient[0]} 0%, ${bean.gradient[1]} 100%)`,
-            }"
-          >
-            <p class="label_flip_front_type txt_label">Type {{ bean.typeNo }}. {{ bean.subtitle }}</p>
-            <div class="visual_flip_front">
-              <BeanCharacter
-                :image="bean.resultImage || bean.image"
-                :alt="bean.nameKo"
-                :light="bean.ink === 'light'"
-              />
-            </div>
-            <p class="tit_flip_front tit_txt">
-              <span class="txt_flip_front_emoji" aria-hidden="true">{{ bean.emoji }}</span>
-              {{ bean.nameKo }}
-              <span class="txt_flip_front_name_en">{{ bean.nameEn }}</span>
-            </p>
-            <div class="group_flip_front_tags">
-              <PillBadge v-for="tag in bean.tags" :key="tag" :ink="bean.ink">
-                {{ tag }}
-              </PillBadge>
-            </div>
+          <!-- 카드 뒷면(클릭/터치로 뒤집으면 보이는 면) -->
+          <div class="face_flip face_flip_b">
+            <img class="img_flip_face" :src="resolveSrc(resultCard.backImage)" alt="" />
           </div>
         </div>
       </div>
@@ -72,9 +48,8 @@ import { onBeforeUnmount, ref, watch } from 'vue'
 import confetti from 'canvas-confetti'
 import ScreenHeader from '@/components/common/ScreenHeader.vue'
 import AppButton from '@/components/common/AppButton.vue'
-import PillBadge from '@/components/common/PillBadge.vue'
-import BeanCharacter from '@/components/common/BeanCharacter.vue'
 import { RESULT_COPY } from '@/data/result.js'
+import { pickResultCard } from '@/data/resultCards.js'
 
 const props = defineProps({
   screenClass: { type: String, default: '' },
@@ -85,9 +60,17 @@ const props = defineProps({
 
 defineEmits(['next', 'back'])
 
+// data/*.js 는 public/ 기준 루트 절대경로로 들어있어, 서브 경로 배포 시 깨지지 않도록 base 를 붙인다.
+const resolveSrc = (src) => {
+  if (!src.startsWith('/')) return src
+  return import.meta.env.BASE_URL.replace(/\/$/, '') + src
+}
+
 const canvasEl = ref(null)
 const flipped = ref(false)
 const confettiFired = ref(false)
+// 원두 성향(9종)과 무관하게, 화면에 들어올 때마다 결과 카드 4종 중 하나를 새로 뽑는다
+const resultCard = ref(pickResultCard())
 let timers = []
 let fire = null
 
@@ -106,7 +89,7 @@ function launchConfetti() {
     fire = confetti.create(canvasEl.value, { resize: true, useWorker: true })
   }
 
-  const colors = [props.bean.gradient[0], props.bean.gradient[1], '#C88A58', '#FAF7F2']
+  const colors = ['#C88A58', '#3D2820', '#FAF7F2']
   fire({ particleCount: 70, spread: 62, origin: { x: 0.5, y: 0.62 }, colors, scalar: 0.9 })
   timers.push(
     setTimeout(
@@ -132,13 +115,17 @@ function toggleFlip() {
   }
 }
 
-// 화면을 벗어나면 다음 진입 시 다시 뒷면부터 보이도록 리셋
+// 화면을 벗어나면 다음 진입 시 다시 앞면부터 보이도록 리셋
 watch(
   () => props.active,
   (isActive) => {
     clearTimers()
     flipped.value = false
-    if (!isActive) confettiFired.value = false
+    if (isActive) {
+      resultCard.value = pickResultCard()
+    } else {
+      confettiFired.value = false
+    }
   },
   { immediate: true },
 )
@@ -200,6 +187,7 @@ onBeforeUnmount(() => {
   transform: rotateY(180deg);
 }
 
+// 앞/뒤 모두 텍스트 없이 이미지만 보여준다
 .face_flip {
   position: absolute;
   inset: 0;
@@ -207,124 +195,18 @@ onBeforeUnmount(() => {
   overflow: hidden;
   backface-visibility: hidden;
   -webkit-backface-visibility: hidden;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
   box-shadow: 0 12px 28px rgba(33, 24, 21, 0.18);
 }
 
-.face_flip_back {
-  justify-content: center;
-  gap: 10px;
-  background:
-    repeating-linear-gradient(
-      -45deg,
-      rgba(250, 247, 242, 0.06) 0 10px,
-      transparent 10px 20px
-    ),
-    linear-gradient(140deg, $espresso 0%, $roasted-black 100%);
-  color: $milk-foam;
-}
-.tit_flip_back {
-  font-family: $font-title;
-  font-size: 20px;
-  font-weight: 700;
-  letter-spacing: 0.22em;
-  color: $caramel;
-}
-.desc_flip_back_hint {
-  font-size: 11px;
-  letter-spacing: 0.06em;
-  opacity: 0.5;
-}
-
-.face_flip_front {
+.face_flip_b {
   transform: rotateY(180deg);
-  justify-content: space-between;
-  padding: 16px 14px;
 }
 
-// 원두 카드와 동일한 스크림 — 밝은 그라데이션에서도 글자 대비를 확보한다
-.face_flip_front::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  pointer-events: none;
-}
-.face_flip_front > * {
-  position: relative;
-  z-index: 1;
-}
-
-.face_flip_ink_dark {
-  color: $roasted-black;
-
-  &::before {
-    background: linear-gradient(
-      to bottom,
-      rgba(255, 255, 255, 0.34) 0%,
-      rgba(255, 255, 255, 0) 24%,
-      rgba(255, 255, 255, 0) 62%,
-      rgba(255, 255, 255, 0.46) 100%
-    );
-  }
-}
-
-.face_flip_ink_light {
-  color: $milk-foam;
-
-  &::before {
-    background: linear-gradient(
-      to bottom,
-      rgba(0, 0, 0, 0.26) 0%,
-      rgba(0, 0, 0, 0) 24%,
-      rgba(0, 0, 0, 0) 62%,
-      rgba(0, 0, 0, 0.34) 100%
-    );
-  }
-}
-
-.label_flip_front_type {
-  flex-shrink: 0;
-  font-size: 12px;
-  opacity: 0.82;
-}
-
-.visual_flip_front {
-  flex: 1;
-  min-height: 0;
-  width: 100%;
-  padding: 6px 0;
-}
-
-.tit_flip_front {
-  flex-shrink: 0;
-  font-size: 21px;
-}
-
-.txt_flip_front_emoji {
-  font-size: 0.86em;
-  margin-right: 2px;
-}
-
-.txt_flip_front_name_en {
+.img_flip_face {
   display: block;
-  font-family: $font-title;
-  font-size: 11px;
-  font-weight: 500;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-  opacity: 0.72;
-  margin-top: 2px;
-}
-
-.group_flip_front_tags {
-  flex-shrink: 0;
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 4px;
-  margin-top: 9px;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
 
 .desc_result {

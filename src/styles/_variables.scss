@@ -17,12 +17,12 @@ $milk-foam: #faf7f2; // White
 $roasted-black: #211815; // Black
 
 // ── 파생 색상 ──
-$espresso-soft: rgba(61, 40, 32, 0.62);
-$espresso-line: rgba(61, 40, 32, 0.16);
-$caramel-soft: rgba(200, 138, 88, 0.16);
-$sage-soft: rgba(138, 154, 134, 0.18);
-$foam-veil: rgba(250, 247, 242, 0.08);
-$foam-line: rgba(250, 247, 242, 0.18);
+$espresso-soft: rgba(61, 40, 32, 0.6);
+$espresso-line: rgba(61, 40, 32, 0.2);
+$caramel-soft: rgba(200, 138, 88, 0.2);
+$sage-soft: rgba(138, 154, 134, 0.2);
+$foam-veil: rgba(250, 247, 242, 0.1);
+$foam-line: rgba(250, 247, 242, 0.2);
 
 // ── 타이포 ──
 $font-body: 'Pretendard', system-ui, -apple-system, 'Apple SD Gothic Neo',
@@ -30,15 +30,15 @@ $font-body: 'Pretendard', system-ui, -apple-system, 'Apple SD Gothic Neo',
 $font-title: 'Spoqa Han Sans Neo', 'Pretendard', system-ui, sans-serif;
 
 // ── 레이아웃 ──
-$bar-h: 48px; // 헤더 / 푸터 높이
-$tap-min: 44px; // 최소 터치 영역
-$gutter-x: 16px;
+$bar-h: 50px; // 헤더 / 푸터 높이
+$tap-min: 45px; // 최소 터치 영역
+$gutter-x: 15px;
 $gutter-y: 12px;
 
 // ── 라운드 ──
-$r-sm: 8px;
-$r-md: 14px;
-$r-lg: 20px;
+$r-sm: 5px;
+$r-md: 10px;
+$r-lg: 15px;
 $r-pill: 999px;
 
 // ── 모션 ──

@@ -169,7 +169,7 @@ const cardClass = (qi) => {
   flex: 1 1 50px;
   display: flex;
   align-items: center;
-  gap: 12px;
+  gap: 10px;
   padding: 6px 12px;
   border: 1px solid $espresso-line;
   border-radius: $r-md;
@@ -188,11 +188,6 @@ const cardClass = (qi) => {
     background: $espresso;
     border-color: $espresso;
 
-    .label_q_key {
-      background: $caramel;
-      border-color: $caramel;
-      color: $roasted-black;
-    }
     .txt_q_label {
       color: $milk-foam;
       font-weight: 600;
@@ -202,15 +197,12 @@ const cardClass = (qi) => {
 
 .label_q_key {
   flex-shrink: 0;
-  width: 24px;
-  height: 24px;
+  width: 25px;
   display: flex;
   align-items: center;
   justify-content: center;
-  border: 1px solid $espresso-line;
-  border-radius: 7px;
   font-family: $font-title;
-  font-size: 11px;
+  font-size: 14px;
   font-weight: 500;
   color: $caramel;
   transition:
@@ -223,9 +215,5 @@ const cardClass = (qi) => {
   font-size: 14px;
   line-height: 1.4;
   color: $espresso;
-
-  @include small-device {
-    font-size: 13px;
-  }
 }
 </style>

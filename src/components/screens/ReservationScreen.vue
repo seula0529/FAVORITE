@@ -41,7 +41,7 @@
 
     <footer class="footer_screen">
       <AppButton variant="primary" block :disabled="!canSend" @click="sendSms">
-        문자로 보내기
+        예약 문자 보내기
       </AppButton>
     </footer>
   </section>
@@ -117,7 +117,7 @@ function sendSms() {
 .cont_rsv {
   justify-content: center;
   padding-top: 4px;
-  gap: 10px;
+  gap: 15px;
 }
 
 // ── 입력 ──
@@ -127,7 +127,8 @@ function sendSms() {
   flex-shrink: 0;
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 8px;
+  grid-template-rows: repeat(auto-fit, 1fr);
+  gap: 10px;
 }
 .field_rsv_name,
 .field_rsv_phone {
@@ -137,13 +138,13 @@ function sendSms() {
 .field_rsv {
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 15px;
   min-width: 0;
   // 터치 영역 최소 44px 이상 유지
   height: 48px;
   padding: 0 12px;
   border: 1px solid $espresso-line;
-  border-radius: $r-md;
+  border-radius: $r-sm;
   background: rgba(250, 247, 242, 0.7);
   transition:
     border-color 0.2s ease,
@@ -159,7 +160,7 @@ function sendSms() {
   flex-shrink: 0;
   min-width: 30px;
   font-family: $font-title;
-  font-size: 11px;
+  font-size: 14px;
   font-weight: 500;
   letter-spacing: 0.02em;
   color: $espresso-soft;
@@ -202,14 +203,14 @@ html[data-keyboard='open'] {
   flex-shrink: 0;
   display: flex;
   flex-direction: column;
-  gap: 8px;
-  margin-top: 4px;
+  gap: 10px;
+  margin-top: 5px;
 }
 
 .txt_rsv_consent_desc {
-  font-size: 10.5px;
+  font-size: 12px;
   line-height: 1.45;
-  color: $espresso-soft;
+  color: $espresso;
   word-break: keep-all;
 }
 
@@ -220,7 +221,7 @@ html[data-keyboard='open'] {
   font-family: $font-title;
   font-size: 12px;
   font-weight: 500;
-  color: $espresso;
+  color: $roasted-black;
   cursor: pointer;
 }
 

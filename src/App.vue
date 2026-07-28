@@ -1,7 +1,7 @@
 <template>
   <div class="wrap_app" :data-direction="direction">
     <!-- 우측 상단 아이콘 (.wrap_app 기준 absolute): 첫 화면 이동(커버 제외) + 인스타 -->
-    <HomeLink v-if="currentScreen !== 'cover'" @click="reset" />
+    <HomeLink v-if="currentScreen !== 'cover'" @click="goHome" />
     <InstagramLink @open="instaOpen = true" />
 
     <!-- 화면 6개가 겹쳐 쌓이는 무대 -->
@@ -91,7 +91,7 @@ const { current, currentScreen, canGoBack, direction, go, back, reset, screenCla
 const instaOpen = ref(false)
 
 // ── 폼지 상태 ──
-const { QUESTIONS, answers, select, payload } = useFormState()
+const { QUESTIONS, answers, select, payload, reset: resetForm } = useFormState()
 
 // 화면을 벗어나도 마지막 문항을 유지하기 위해 별도 보관
 const formStep = ref(0)
@@ -102,6 +102,13 @@ watch(current, (entry) => {
 })
 
 const startForm = () => go('form:0')
+
+// 첫 화면으로 이동 시, 이전에 고르던 선택지도 함께 초기화한다
+function goHome() {
+  reset()
+  resetForm()
+  formStep.value = 0
+}
 
 function nextQuestion() {
   const step = formStep.value
