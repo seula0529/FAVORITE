@@ -89,6 +89,13 @@ defineEmits(['start', 'reserve'])
   width: 90%;
   opacity: 0.85;
   padding: 10px 0;
+
+  :deep(.img_char) {
+    width: auto;
+    height: 100%;
+    max-width: 100%;
+    object-fit: contain;
+  }
 }
 
 .area_cover_bottom {

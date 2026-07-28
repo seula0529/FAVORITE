@@ -20,7 +20,8 @@
       "Bash(cp \"C:\\\\Users\\\\user\\\\AppData\\\\Local\\\\Temp\\\\claude\\\\c--Users-user-Desktop-personal-FAVORITE\\\\eed115c0-b6a1-4302-be27-c4e2e3506c4c\\\\scratchpad\\\\beans_type6_card.png\" \"C:\\\\Users\\\\user\\\\AppData\\\\Local\\\\Temp\\\\claude\\\\c--Users-user-Desktop-personal-FAVORITE\\\\eed115c0-b6a1-4302-be27-c4e2e3506c4c\\\\scratchpad\\\\beans_type6_card_BEFORE.png\")",
       "Bash(rm -f __test_beans.cjs)",
       "Bash(awk '{print $5}')",
-      "Bash(taskkill //F //PID 13156)"
+      "Bash(taskkill //F //PID 13156)",
+      "Bash(curl -sf http://localhost:5173)"
     ]
   }
 }
