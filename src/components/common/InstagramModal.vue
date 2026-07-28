@@ -224,6 +224,7 @@ watch(
   max-width: 100%;
   max-height: 100%;
   object-fit: contain;
+  border-radius: $r-sm;
 }
 
 .btn_insta_nav {
