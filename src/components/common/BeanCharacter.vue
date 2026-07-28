@@ -52,7 +52,7 @@ const src = computed(() => {
 .img_char {
   width: 100%;
   height: auto;
-  object-fit: cover;
+  object-fit: contain;
 }
 
 // ── SCSS 도형 placeholder ──

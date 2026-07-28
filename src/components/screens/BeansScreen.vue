@@ -112,7 +112,7 @@ watch(
 
 <style scoped lang="scss">
 .cont_beans {
-  padding: 6px 0;
+  padding: 25px 0 10px;
   justify-content: center;
 }
 
@@ -215,7 +215,7 @@ watch(
 
   :deep(.img_char) {
     width: auto;
-    height: 60%;
+    height: 70%;
     max-width: 100%;
     object-fit: contain;
   }
