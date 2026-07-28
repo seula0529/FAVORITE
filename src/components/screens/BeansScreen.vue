@@ -211,6 +211,13 @@ watch(
   min-height: 0;
   width: 100%;
   padding: 10px 0;
+
+  :deep(.img_char) {
+    width: auto;
+    height: 60%;
+    max-width: 100%;
+    object-fit: contain;
+  }
 }
 
 .tit_bean {
