@@ -1,0 +1,26 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(node drive7.mjs)",
+      "Bash(powershell -Command \"Stop-Process -Id 24772 -Force\")",
+      "Bash(python3 -c ' *)",
+      "Bash(node drive8.mjs)",
+      "Bash(powershell -Command \"Stop-Process -Id 26764 -Force\")",
+      "Bash(xargs -I{} grep -Hm1 '^description:' {})",
+      "Bash(node -e ' *)",
+      "Bash(npm install *)",
+      "Bash(node -e \"console.log\\(require.resolve\\('playwright'\\)\\)\")",
+      "Bash(npx playwright *)",
+      "Bash(node \"C:\\\\Users\\\\user\\\\AppData\\\\Local\\\\Temp\\\\claude\\\\c--Users-user-Desktop-personal-FAVORITE\\\\eed115c0-b6a1-4302-be27-c4e2e3506c4c\\\\scratchpad\\\\test_beans.js\")",
+      "Bash(cp \"C:\\\\Users\\\\user\\\\AppData\\\\Local\\\\Temp\\\\claude\\\\c--Users-user-Desktop-personal-FAVORITE\\\\eed115c0-b6a1-4302-be27-c4e2e3506c4c\\\\scratchpad\\\\test_beans.js\" ./__test_beans.js)",
+      "Bash(node ./__test_beans.js)",
+      "Bash(mv __test_beans.js __test_beans.cjs)",
+      "Bash(node ./__test_beans.cjs)",
+      "Bash(git stash *)",
+      "Bash(cp \"C:\\\\Users\\\\user\\\\AppData\\\\Local\\\\Temp\\\\claude\\\\c--Users-user-Desktop-personal-FAVORITE\\\\eed115c0-b6a1-4302-be27-c4e2e3506c4c\\\\scratchpad\\\\beans_type6_card.png\" \"C:\\\\Users\\\\user\\\\AppData\\\\Local\\\\Temp\\\\claude\\\\c--Users-user-Desktop-personal-FAVORITE\\\\eed115c0-b6a1-4302-be27-c4e2e3506c4c\\\\scratchpad\\\\beans_type6_card_BEFORE.png\")",
+      "Bash(rm -f __test_beans.cjs)",
+      "Bash(awk '{print $5}')",
+      "Bash(taskkill //F //PID 13156)"
+    ]
+  }
+}

@@ -1,5 +1,5 @@
 // ─────────────────────────────────────────────
-//  목적 · 취지 캐러셀 — 더미 콘텐츠
+//  목적 · 취지 캐러셀
 //
 //  구조:
 //  { id, step, title, body, accent, image }
@@ -11,29 +11,29 @@ export const PURPOSE_SLIDES = [
   {
     id: 'p1',
     step: 'About 01',
-    title: '왜 원두 성향을\n물어보게 되었나',
-    body: '사람마다 좋아하는 맛이 다른데,\n커피는 늘 같은 이름으로만 불렸습니다.\n취향을 언어로 만들어보고 싶었어요.',
-    image: '/images/purpose1.jpg',
+    title: '광주의 새로운 카페 문화',
+    body: '광주에는 없던 카페 경험을 만들고 싶었습니다.\n원두 한 잔에 담긴 이야기로 새로운 문화를 제안합니다.',
+    image: '/images/img_purpose3.jpg',
   },
   {
     id: 'p2',
     step: 'About 02',
-    title: '아홉 가지 성향으로\n나눈 이유',
-    body: '너무 좁으면 나를 담지 못하고,\n너무 넓으면 아무 말도 되지 않습니다.\n그 사이의 균형점을 찾았습니다.',
-    image: '/images/purpose2.jpg',
+    title: '이색 컨셉 벤치마킹',
+    body: '성수, 제주 등 전국의 특색 있는 카페를 직접 찾아다니며\n우리만의 오마카세 경험을 구상했습니다.',
+    image: '/images/img_purpose2.jpg',
   },
   {
     id: 'p3',
     step: 'About 03',
-    title: '이 진단이\n닿았으면 하는 곳',
-    body: '결과가 정답이 되기보다는,\n다음 한 잔을 고르는 작은 힌트가 되기를\n바라며 만들었습니다.',
-    image: '/images/purpose3.jpg',
+    title: '다양한 콘텐츠 실험',
+    body: '방송, SNS 등 다양한 채널의 이야기를 참고하며\n원두 진단이라는 새로운 콘텐츠를 실험했습니다.',
+    image: '/images/img_purpose1.jpg',
   },
   {
     id: 'p4',
     step: 'About 04',
-    title: '함께 만들어가는\n취향의 기록',
-    body: '응답 하나하나가 다음 시즌의 원두를\n고르는 기준이 됩니다.\n당신의 취향이 곧 재료입니다.',
-    image: '/images/purpose4.jpg',
+    title: '지속적인 도전과 검증',
+    body: '광주에 없던 카페 경험을 만들기 위해\n끊임없이 벤치마킹하고 도전하며 검증을 거듭합니다.',
+    image: '/images/img_purpose4.jpg',
   },
 ]

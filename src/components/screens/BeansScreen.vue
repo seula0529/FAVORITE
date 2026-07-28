@@ -51,6 +51,8 @@
           </article>
         </SwiperSlide>
       </Swiper>
+
+      <p class="desc_beans">{{ CURATION_DESC }}</p>
     </div>
 
     <footer class="footer_screen footer_beans">
@@ -71,6 +73,10 @@ import AppButton from '@/components/common/AppButton.vue'
 import PillBadge from '@/components/common/PillBadge.vue'
 import BeanCharacter from '@/components/common/BeanCharacter.vue'
 import { BEANS as beans } from '@/data/beans.js'
+
+// 원두 성향과 무관하게 9종 카드 공통으로 노출되는 큐레이션 서비스 설명
+const CURATION_DESC =
+  '원두 시향과 스몰토크를 통해 나만의 원두를 찾고,\n맞춤 드립백을 제공하는 큐레이션 체험'
 
 const props = defineProps({
   screenClass: { type: String, default: '' },
@@ -112,7 +118,18 @@ watch(
 
 .swiper_beans {
   width: 100%;
-  height: 100%;
+  flex: 1;
+  min-height: 0;
+}
+
+.desc_beans {
+  flex-shrink: 0;
+  white-space: pre-line;
+  text-align: center;
+  font-size: 14px;
+  line-height: 1.5;
+  color: $espresso;
+  margin-top: 15px;
 }
 
 :deep(.swiper-slide) {
@@ -129,7 +146,7 @@ watch(
   min-height: 0;
   width: 100%;
   aspect-ratio: 3 / 4;
-  border-radius: $r-lg;
+  border-radius: $r-md;
   overflow: hidden;
   display: flex;
   flex-direction: column;
