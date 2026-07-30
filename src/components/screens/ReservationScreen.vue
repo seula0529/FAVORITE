@@ -107,8 +107,8 @@ function sendSms() {
     // iOS: sms://번호?body=내용 (슬래시 두 개가 수신자 번호 인식에 필수)
     window.location.href = `sms://${rawPhone}?body=${encoded}`
   } else {
-    // Android: smsto:번호:내용
-    window.location.href = `smsto:${rawPhone}:${text}`
+    // Android: sms:번호?body=내용
+    window.location.href = `sms:${rawPhone}?body=${encoded}`
   }
 }
 </script>
